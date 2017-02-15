@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generated="20170209 17:05:42.720" generator="Robot 3.0.1 (Python 2.7.12 on linux2)">
+<suite source="/home/samueldeng/AFVersioning/amazon.robot" id="s1" name="Amazon">
+<kw type="setup" name="Open Browser" library="Selenium2Library">
+<doc>Opens a new browser instance to given URL.</doc>
+<arguments>
+<arg>${HomePage}</arg>
+</arguments>
+<msg timestamp="20170209 17:05:43.181" level="INFO">Opening browser 'firefox' to base url 'http://www.google.ca'</msg>
+<status status="PASS" endtime="20170209 17:05:52.203" starttime="20170209 17:05:43.181"></status>
+</kw>
+<test id="s1-t1" name="Google istuary">
+<kw type="setup" name="Go To" library="Selenium2Library">
+<doc>Navigates the active browser instance to the provided URL.</doc>
+<arguments>
+<arg>${HomePage}</arg>
+</arguments>
+<msg timestamp="20170209 17:05:52.208" level="INFO">Opening url 'http://www.google.ca'</msg>
+<status status="PASS" endtime="20170209 17:05:52.977" starttime="20170209 17:05:52.206"></status>
+</kw>
+<kw name="Read Csv File" library="csvLibrary">
+<arguments>
+<arg>try.csv</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20170209 17:05:52.979" level="INFO">${data} = [['istuary', '123'], ['baidu', '222'], ['yahoo', '343']]</msg>
+<status status="PASS" endtime="20170209 17:05:52.980" starttime="20170209 17:05:52.978"></status>
+</kw>
+<kw name="Google and check">
+<arguments>
+<arg>${data[0][0]}</arg>
+</arguments>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20170209 17:05:52.991" starttime="20170209 17:05:52.984"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=lst-ib</arg>
+<arg>${searchkey}</arg>
+</arguments>
+<msg timestamp="20170209 17:05:52.992" level="INFO">Typing text 'istuary' into text field 'id=lst-ib'</msg>
+<status status="PASS" endtime="20170209 17:05:53.361" starttime="20170209 17:05:52.991"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>id=_fZl</arg>
+</arguments>
+<msg timestamp="20170209 17:05:53.363" level="INFO">Clicking element 'id=_fZl'.</msg>
+<status status="PASS" endtime="20170209 17:05:53.469" starttime="20170209 17:05:53.362"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>id=gb_70</arg>
+</arguments>
+<msg timestamp="20170209 17:05:53.471" level="INFO">Clicking element 'id=gb_70'.</msg>
+<status status="PASS" endtime="20170209 17:05:53.512" starttime="20170209 17:05:53.470"></status>
+</kw>
+<status status="PASS" endtime="20170209 17:05:53.513" starttime="20170209 17:05:52.981"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>${data[0][0]}</arg>
+</arguments>
+<status status="PASS" endtime="20170209 17:05:53.770" starttime="20170209 17:05:53.514"></status>
+</kw>
+<tags>
+<tag>CID:C8</tag>
+</tags>
+<status status="PASS" endtime="20170209 17:05:53.770" critical="yes" starttime="20170209 17:05:52.203"></status>
+</test>
+<test id="s1-t2" name="Google baidu">
+<kw type="setup" name="Go To" library="Selenium2Library">
+<doc>Navigates the active browser instance to the provided URL.</doc>
+<arguments>
+<arg>${HomePage}</arg>
+</arguments>
+<msg timestamp="20170209 17:05:53.776" level="INFO">Opening url 'http://www.google.ca'</msg>
+<status status="PASS" endtime="20170209 17:05:54.518" starttime="20170209 17:05:53.775"></status>
+</kw>
+<kw name="Read Csv File" library="csvLibrary">
+<arguments>
+<arg>try.csv</arg>
+</arguments>
+<assign>
+<var>${data}</var>
+</assign>
+<msg timestamp="20170209 17:05:54.519" level="INFO">${data} = [['istuary', '123'], ['baidu', '222'], ['yahoo', '343']]</msg>
+<status status="PASS" endtime="20170209 17:05:54.519" starttime="20170209 17:05:54.519"></status>
+</kw>
+<kw name="Google and check">
+<arguments>
+<arg>${data[1][0]}</arg>
+</arguments>
+<kw name="Maximize Browser Window" library="Selenium2Library">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" endtime="20170209 17:05:54.523" starttime="20170209 17:05:54.520"></status>
+</kw>
+<kw name="Input Text" library="Selenium2Library">
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<arguments>
+<arg>id=lst-ib</arg>
+<arg>${searchkey}</arg>
+</arguments>
+<msg timestamp="20170209 17:05:54.524" level="INFO">Typing text 'baidu' into text field 'id=lst-ib'</msg>
+<status status="PASS" endtime="20170209 17:05:54.623" starttime="20170209 17:05:54.524"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>id=_fZl</arg>
+</arguments>
+<msg timestamp="20170209 17:05:54.624" level="INFO">Clicking element 'id=_fZl'.</msg>
+<status status="PASS" endtime="20170209 17:05:54.711" starttime="20170209 17:05:54.624"></status>
+</kw>
+<kw name="Click Element" library="Selenium2Library">
+<doc>Click element identified by `locator`.</doc>
+<arguments>
+<arg>id=gb_70</arg>
+</arguments>
+<msg timestamp="20170209 17:05:54.715" level="INFO">Clicking element 'id=gb_70'.</msg>
+<status status="PASS" endtime="20170209 17:05:54.749" starttime="20170209 17:05:54.712"></status>
+</kw>
+<status status="PASS" endtime="20170209 17:05:54.749" starttime="20170209 17:05:54.520"></status>
+</kw>
+<kw name="Wait Until Page Contains" library="Selenium2Library">
+<doc>Waits until `text` appears on current page.</doc>
+<arguments>
+<arg>${data[1][0]}</arg>
+</arguments>
+<status status="PASS" endtime="20170209 17:05:55.032" starttime="20170209 17:05:54.749"></status>
+</kw>
+<kw name="Close All Browsers" library="Selenium2Library">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" endtime="20170209 17:05:55.114" starttime="20170209 17:05:55.032"></status>
+</kw>
+<tags>
+<tag>CID:C9</tag>
+</tags>
+<status status="PASS" endtime="20170209 17:05:55.115" critical="yes" starttime="20170209 17:05:53.773"></status>
+</test>
+<test id="s1-t3" name="Google something else">
+<kw type="setup" name="Go To" library="Selenium2Library">
+<doc>Navigates the active browser instance to the provided URL.</doc>
+<arguments>
+<arg>${HomePage}</arg>
+</arguments>
+<msg timestamp="20170209 17:05:55.117" level="INFO">Opening url 'http://www.google.ca'</msg>
+<kw name="Capture Page Screenshot" library="Selenium2Library">
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<msg timestamp="20170209 17:05:55.202" level="FAIL">No browser is open</msg>
+<status status="FAIL" endtime="20170209 17:05:55.202" starttime="20170209 17:05:55.117"></status>
+</kw>
+<msg timestamp="20170209 17:05:55.202" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No browser is open</msg>
+<msg timestamp="20170209 17:05:55.203" level="FAIL">No browser is open</msg>
+<status status="FAIL" endtime="20170209 17:05:55.203" starttime="20170209 17:05:55.116"></status>
+</kw>
+<tags>
+<tag>CID:C10</tag>
+</tags>
+<status status="FAIL" endtime="20170209 17:05:55.203" critical="yes" starttime="20170209 17:05:55.115">Setup failed:
+No browser is open</status>
+</test>
+<doc>This is info</doc>
+<status status="FAIL" endtime="20170209 17:05:55.204" starttime="20170209 17:05:42.725"></status>
+</suite>
+<statistics>
+<total>
+<stat fail="1" pass="2">Critical Tests</stat>
+<stat fail="1" pass="2">All Tests</stat>
+</total>
+<tag>
+<stat fail="1" pass="0">CID:C10</stat>
+<stat fail="0" pass="1">CID:C8</stat>
+<stat fail="0" pass="1">CID:C9</stat>
+</tag>
+<suite>
+<stat fail="1" id="s1" name="Amazon" pass="2">Amazon</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20170209 17:05:55.202" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: No browser is open</msg>
+</errors>
+</robot>

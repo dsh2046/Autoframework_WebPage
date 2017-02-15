@@ -1,0 +1,67 @@
+import org.bson.Document;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentXReporter;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+
+public class MyDemo1{
+
+	public static void main(String[] args)
+	{
+        ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter("extent.html");    
+        ExtentReports extent = new ExtentReports();     
+       extent.attachReporter(htmlReporter);
+ 
+//         try {  
+//        	 MongoClient mongo = new MongoClient("localhost", 27017);  
+//             MongoDatabase db = mongo.getDatabase("mydb");
+//             MongoCollection collection = db.getCollection("TestCase");  
+//             FindIterable f = collection.find();
+//             MongoCursor cursor = f.iterator(); 
+//             System.out.println(collection.find());
+//             while (cursor.hasNext()) {  
+//            	 Document abc = (Document) cursor.next(); 
+//            	 System.out.println(abc);
+//                ExtentTest test = extent.createTest(abc.getString("Test Name"), "Sample description");     
+//                ExtentTest child = test.createNode("MyfirstNode");
+//                child.pass("dettails for child");
+//                 if((abc.getString("Test Status")).equals("PASS"))
+//	                 {
+//	                	 test.log(Status.PASS, "This case runs successfully");
+//                    	 test.info("sssssssssssssssssssssssss");
+//	                 }
+//                 else
+//	                 {
+//	            	 test.log(Status.FAIL, "This case failed!!!");
+//	            	 test.info("ffffffffffffffffffffff");
+//	                 }
+//             }  
+//             System.out.println("Done"); 
+//             cursor.close();
+//             mongo.close();
+//         } catch (MongoException e) {  
+//             e.printStackTrace();  
+//         }      
+       ExtentTest test = extent.createTest("asf", "Sample description"); 
+       test.log(Status.FAIL, "This case failed!!!");
+    	 test.info("ffffffffffffffffffffff");
+        
+       extent.flush();  
+       htmlReporter.setAppendExisting(true);
+	}
+	
+}

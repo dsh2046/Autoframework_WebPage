@@ -1,0 +1,52 @@
+import org.bson.Document;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+
+public class MyDemo1{
+	private static ExtentReports extent;
+
+	public static void main(String[] args)
+	{
+        extent = new ExtentReports("extent.html", false); 
+//         try {  
+//        	 MongoClient mongo = new MongoClient("localhost", 27017);  
+//             MongoDatabase db = mongo.getDatabase("mydb");
+//             MongoCollection collection = db.getCollection("TestCase");  
+//             FindIterable f = collection.find();
+//             MongoCursor cursor = f.iterator(); 
+//             System.out.println(collection.find());
+//             while (cursor.hasNext()) {  
+//            	 Document abc = (Document) cursor.next(); 
+//            	 System.out.println(abc);
+//                ExtentTest test = extent.createTest(abc.getString("Test Name"), "Sample description");     
+//                ExtentTest child = test.createNode("MyfirstNode");
+//                child.pass("dettails for child");
+//                 if((abc.getString("Test Status")).equals("PASS"))
+//	                 {
+//	                	 test.log(Status.PASS, "This case runs successfully");
+//                    	 test.info("sssssssssssssssssssssssss");
+//	                 }
+//                 else
+//	                 {
+//	            	 test.log(Status.FAIL, "This case failed!!!");
+//	            	 test.info("ffffffffffffffffffffff");
+//	                 }
+//             }  
+//             System.out.println("Done"); 
+//             cursor.close();
+//             mongo.close();
+//         } catch (MongoException e) {  
+//             e.printStackTrace();  
+//         }      
+        ExtentTest test = extent.startTest("My First Test", "Sample description");
+       test.log(LogStatus.FAIL, "This case failed!!!");
+       test.log(LogStatus.INFO, "infoooooo!!");
+       extent.endTest(test);
+       extent.flush();  
+       
+	}
+	
+}

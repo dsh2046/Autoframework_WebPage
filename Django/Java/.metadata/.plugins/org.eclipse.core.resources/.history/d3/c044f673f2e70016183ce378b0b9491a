@@ -1,0 +1,89 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.List;
+
+import org.bson.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.XMLOutputter;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+
+public class MyDemo1{
+	private static ExtentReports extent;
+
+	public static void main(String[] args) throws JDOMException, IOException
+	{
+        extent = new ExtentReports(System.getProperty("user.dir")+"/src/extent.html", true); 
+         try {         	 
+        	 MongoClient mongo = new MongoClient("localhost", 27017);
+             MongoDatabase db = mongo.getDatabase("mydb");
+             MongoCollection collection = db.getCollection("TestCase");  
+             FindIterable f = collection.find();
+             
+             MongoCursor cursor = f.iterator(); 
+             System.out.println(collection.find());
+             while (cursor.hasNext()) {  
+            	 Document abc = (Document) cursor.next(); 
+            	 System.out.println(abc);
+                ExtentTest test = extent.startTest(abc.getString("Test Name"), "Sample description");
+                test.log(LogStatus.INFO, "<b>StartTime</b>:"+abc.getString("StartTime")+"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp"+"<b>EndTime</b>:"+" "+abc.getString("EndTime"));
+                 if((abc.getString("Test Status")).equals("PASS"))
+	                 {
+	                	 test.log(LogStatus.PASS, "This case runs successfully");
+	                 }
+                 else
+	                 {
+	            	 test.log(LogStatus.FAIL, "This case failed!!!");
+	                 }
+                 
+            	 SAXBuilder builder = new SAXBuilder();
+            	 InputStream file = new FileInputStream(System.getProperty("user.dir")+"/src/extent-config.xml");
+            	  org.jdom2.Document document = builder.build(file);
+            	  Element root = document.getRootElement();
+            	  List<Element> list = root.getChildren();
+            	  String tt = abc.getString("StartTime");
+//            	  for(Element e:list) {
+//            		   e.getChild("scripts").setText("$(document).ready(function() {$('.test-started-time').text("+'"'+tt+'"'+");});");
+//            		  }
+            	  XMLOutputter out = new XMLOutputter();
+            	  out.output(document, new FileOutputStream(System.getProperty("user.dir")+"/src/extent-config.xml"));
+                 
+                 extent.loadConfig(new File(System.getProperty("user.dir")+"/src/extent-config.xml"));
+                 extent.endTest(test);
+                 extent.flush(); 
+             }  
+             
+             System.out.println("Done"); 
+             cursor.close();
+             mongo.close();
+             
+         } catch (MongoException e) {  
+             e.printStackTrace();  
+         }      
+        
+//        ExtentTest test = extent.startTest("My First Test", "Sample description");
+//       test.log(LogStatus.FAIL, "This case failed!!!");
+//       test.log(LogStatus.INFO, "infoooooo!!");
+//       test.log(LogStatus.INFO, "HTML", "<h2>123</h2>");
+//       extent.loadConfig(new File("extent-config.xml"));
+//       extent.endTest(test);
+ //      extent.flush();  
+	}
+	
+}

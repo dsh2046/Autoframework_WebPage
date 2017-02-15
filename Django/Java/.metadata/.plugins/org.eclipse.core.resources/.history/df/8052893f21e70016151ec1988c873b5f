@@ -1,0 +1,58 @@
+import java.util.Date;
+
+import org.bson.Document;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+
+public class MyDemo1{
+	private static ExtentReports extent;
+
+	public static void main(String[] args)
+	{
+        extent = new ExtentReports("extent.html", true); 
+//         try {  
+//        	 MongoClient mongo = new MongoClient("localhost", 27017);  
+//             MongoDatabase db = mongo.getDatabase("mydb");
+//             MongoCollection collection = db.getCollection("TestCase");  
+//             FindIterable f = collection.find();
+//             MongoCursor cursor = f.iterator(); 
+//             System.out.println(collection.find());
+//             while (cursor.hasNext()) {  
+//            	 Document abc = (Document) cursor.next(); 
+//            	 System.out.println(abc);
+//                ExtentTest test = extent.createTest(abc.getString("Test Name"), "Sample description");     
+//                ExtentTest child = test.createNode("MyfirstNode");
+//                child.pass("dettails for child");
+//                 if((abc.getString("Test Status")).equals("PASS"))
+//	                 {
+//	                	 test.log(Status.PASS, "This case runs successfully");
+//                    	 test.info("sssssssssssssssssssssssss");
+//	                 }
+//                 else
+//	                 {
+//	            	 test.log(Status.FAIL, "This case failed!!!");
+//	            	 test.info("ffffffffffffffffffffff");
+//	                 }
+//             }  
+//             System.out.println("Done"); 
+//             cursor.close();
+//             mongo.close();
+//         } catch (MongoException e) {  
+//             e.printStackTrace();  
+//         }      
+        ExtentTest test = extent.startTest("My First Test", "Sample description");
+       test.log(LogStatus.FAIL, "This case failed!!!");
+       test.log(LogStatus.INFO, "infoooooo!!");
+       test.log(LogStatus.INFO, "HTML", "<h2>123</h2>");
+       String js = "$(document).ready(function() {var dates=[];$('.test-started-time, .test-ended-time').each(function() { dates.push(new Date($(this).text().replace('-', '/').replace('-', '/'))); });var maxDate=new Date(Math.max.apply(null,dates));var minDate=new Date(Math.min.apply(null,dates));$('.suite-started-time').text(minDate.toLocaleFormat('%Y-%m-%d %H:%M:%S'));$('.suite-ended-time').text(maxDate.toLocaleFormat('%Y-%m-%d %H:%M:%S'));function newFunc() {var ended = $('.suite-ended-time').text().replace('-', '/').replace('-', '/');var started = $('.suite-started-time').text().replace('-', '/').replace('-', '/');var diff = new Date(new Date(ended) - new Date(started));var hours = Math.floor(diff / 36e5),minutes = Math.floor(diff % 36e5 / 60000),seconds = Math.floor(diff % 60000 / 1000);$('.suite-total-time-taken').text(hours + 'h ' + minutes + 'm ' + seconds + 's');} newFunc();})";
+       String jjs = "$(document).ready(function() { alert('123') })";
+       
+       extent.endTest(test);
+       extent.flush();  
+       extent.config().insertJs(jjs);
+	}
+	
+}
